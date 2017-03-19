@@ -1,0 +1,98 @@
+<button class="btn btn-md btn-success" data-toggle="modal" type="button"
+	data-target="#addTourModal"><fmt:message key="addTour"/></button>
+<div class="modal fade" id="addTourModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" data-show="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+
+			<form action="controller" name="addTour" method="post">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title"><fmt:message key="addTour"/></h4>
+					&nbsp;
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3">
+
+								<input type="hidden" name="command" value="addTour" />
+								<p>
+									<fmt:message key="name"/> <input type="text" class="form-control" name="name" required/>
+								</p>
+								
+								<div class="container-fluid" style="padding-bottom: 10px">
+									<div class="row">
+									
+										<div class="col-md-6" style="padding-left: 0px">
+											<fmt:message key="tourType"/> <select name="tourType" class="form-control">
+												<option selected="selected">-</option>
+												<c:forEach items="${tourTypes}" var="tourType">
+													<option value="${tourType}"><fmt:message key="${tourType}"/></option>
+												</c:forEach>
+											</select>
+
+										</div>
+										<div class="col-md-6" style="padding-left: 0px">
+										<fmt:message key="hotelType"/> <select name="hotelType" class="form-control">
+										<option selected="selected">-</option>
+										<c:forEach items="${hotelTypes}" var="hotelType">
+											<option value="${hotelType}"><fmt:message key="${hotelType}"/></option>
+										</c:forEach>
+										
+									</select>
+									</div>
+									
+									</div>
+								</div>
+								
+
+								<p>
+									<fmt:message key="country"/> <input type="text" class="form-control" name="country" required/>
+								</p>
+								<p>
+									<fmt:message key="people"/> <input type="text" class="form-control"
+										name="peopleCount" required/>
+								</p>
+
+							</div>
+							<div class="col-md-3">
+								<p>
+									<fmt:message key="stars"/><span class="glyphicon glyphicon-star-empty"
+										style="font-size: 100%; color: #FFEB3B"></span> <select
+										name="stars" class="form-control">
+										<c:forEach var="i" begin="1" end="5">
+											<option value="${i}">${i}</option>
+										</c:forEach>
+									</select>
+								</p>
+								
+								<p>
+									<fmt:message key="place"/> <input type="text" name="place" class="form-control" required/>
+								</p>
+								<p>
+									<fmt:message key="price"/> <input type="text" name="price" class="form-control" required/>
+								</p>
+								<br>
+								<p>
+									<fmt:message key="active"/>: 
+									 <input type="radio" name="actived" value="true" required><fmt:message key="yes"/> <input type="radio" name="actived" value="false"><fmt:message key="no"/>&nbsp;
+								</p>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<input class="btn btn-primary" value="Create" type="submit" />
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

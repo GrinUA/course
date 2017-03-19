@@ -1,0 +1,166 @@
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand"
+               href="/" type="redirect"><img
+                    src="img/logoSmall.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="responsive-menu">
+
+            <div class="nav navbar-nav navbar-right">
+                <c:if test="${user != null}">
+
+                </c:if>
+                <c:if test="${user == null}">
+                    <a href="/login"><span
+                            class="glyphicon glyphicon-log-in"
+                            style="font-size: 160%; color: #ffffff; top: 15px;"></span></a>
+                </c:if>
+                <c:if test="${user != null}">
+                    <a
+                            href="/login?logout">
+						<span class="glyphicon glyphicon-log-out"
+                              style="font-size: 160%; color: #ffffff; top: 15px;"></span>
+                    </a>
+                </c:if>
+                <li class="dropdown"><a class="dropdown-toggle"
+                                        data-toggle="dropdown"> <img src="img/${language!=null?language:'en'}.png">
+                </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><img src="img/en.png"></a></li>
+                        <li><a href="#"><img src="img/ru.png"></a></li>
+                        <li><a href="#"><img src="img/uk.png"></a></li>
+                    </ul></li>
+
+            </div>
+            <div class="nav navbar-nav navbar-right" style="color: #FFFFFF">
+                <c:if test="${user !=null}">
+                    <a
+                            href="/personalCabinet"
+                            class="navbar-text"><span class="glyphicon glyphicon-user"
+                                                      style="font-size: 110%; color: #FFEB3B"></span> ${userRole.name} ${user.firstName}
+                            ${user.lastName}</a>
+                </c:if>
+
+            </div>
+
+
+
+
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown"><a class="dropdown-toggle"
+                                        data-toggle="dropdown"><span class="glyphicon glyphicon-search"
+                                                                     style="font-size: 110%; color: #FFEB3B"></span> <fmt:message key="search"/></a>
+                    <ul class="dropdown-menu noclose" role="menu">
+                        <li>
+                            <form action="controller" method="post">
+                                <input type="hidden" name="command" value="findTour" />
+                                <div class="container container-small">
+                                    <div class="container-fluid"
+                                         style="padding: 15px; padding-bottom: 3px;border-left: dotted; border-right: dotted;">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <p>
+                                                    <span style="font-size: 120%;"><fmt:message key="name"/>:</span>
+
+                                                </p>
+                                                <p>
+                                                    <span style="font-size: 120%;"><fmt:message key="country"/>:</span>
+                                                </p>
+                                                <p>
+                                                    <span style="font-size: 120%;"><fmt:message key="tourType"/>:</span>
+                                                </p>
+                                                <p>
+                                                    <span style="font-size: 120%;"><fmt:message key="hotelType"/>:</span>
+                                                </p>
+                                                <p>
+                                                    <span style="font-size: 120%;"><fmt:message key="people"/>:</span>
+                                                </p>
+
+                                                <p>
+                                                    <span style="font-size: 120%;"><fmt:message key="price"/>:</span>
+                                                </p>
+
+                                            </div>
+                                            <div class="col-md-7" style="padding-left: 25px">
+                                                <p>
+                                                    <input type="text" name="name" style="width: 120px" placeholder="<fmt:message key="name"/>"/>
+                                                </p>
+                                                <p>
+
+                                                    <input type="text" name="country" style="width: 120px" placeholder="<fmt:message key="country"/>"/>
+
+                                                </p>
+                                                <p>
+                                                    <select name="tourType" style="width: 120px">
+                                                        <option selected="selected" value="">-</option>
+                                                        <c:forEach items="${tourTypes}" var="tourType">
+                                                            <option value="${tourType}">${tourType}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </p>
+                                                <p>
+                                                    <select name="hotelType" style="width: 120px">
+                                                        <option selected="selected" value="">-</option>
+                                                        <c:forEach items="${hotelTypes}" var="hotelType">
+                                                            <option value="${hotelType}">${hotelType}</option>
+                                                        </c:forEach>
+
+                                                    </select>
+                                                </p>
+
+                                                <p>
+                                                    <input type="text" name="minPeople" style="width: 52px" placeholder="<fmt:message key="from"/>"/>
+                                                    - <input type="text" name="maxPeople" style="width: 52px" placeholder="<fmt:message key="to"/>"/>&nbsp;
+                                                </p>
+
+                                                <p>
+                                                    <input type="text" name="minPrice" style="width: 52px" placeholder="<fmt:message key="from"/>"/> -
+                                                    <input type="text" name="maxPrice" style="width: 52px" placeholder="<fmt:message key="to"/>"/>$&nbsp;
+                                                </p>
+                                            </div>
+                                            <input type="submit" value="<fmt:message key="search"/>" style="margin-left: 60px;width: 150px"
+                                                   class="form-control btn btn-md btn-primary" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+
+                    </ul></li>
+            </ul>
+            <c:if test="${user !=null}">
+                <c:if test="${userRole.name != 'user' }">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><a class="dropdown-toggle"
+                                                data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
+                                                                             style="font-size: 110%; color: #FFEB3B"></span> <fmt:message key="menu"/><b
+                                class="caret"></b></a>
+
+                            <ul class="dropdown-menu">
+                                <c:choose>
+                                    <c:when test="${userRole.name == 'admin'}">
+                                        <li><a href="controller?command=listOrders"><fmt:message key="orders"/></a></li>
+                                        <li><a href="controller?command=listTours"><fmt:message key="tours"/></a></li>
+                                        <li><a href="controller?command=listUsers"><fmt:message key="users"/></a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><fmt:message key="info"/>...</a></li>
+                                    </c:when>
+                                 <%--   <c:when test="${userRole.name == 'admin'}">
+
+                                        <li><a href="controller?command=listOrders"><fmt:message key="orders"/></a></li>
+                                        <li><a href="controller?command=listTours"><fmt:message key="tours"/></a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><fmt:message key="info"/>...</a></li>
+                                    </c:when>--%>
+                                </c:choose>
+                            </ul></li>
+                    </ul>
+                </c:if>
+            </c:if>
+        </div>
+
+    </div>
+</div>

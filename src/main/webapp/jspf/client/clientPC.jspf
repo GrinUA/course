@@ -1,0 +1,115 @@
+<div class="container background" style="padding-top: 15px">
+	<hr>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<fmt:message key="myInfo" />
+						:
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="container-fluide">
+						<img class="img-rounded center-block"
+							src="img/${userRole.name}.png" height=150px width=140px />
+						<div class="row">
+							<div class="col-md-9" style="padding-left: 30px">
+								<p>
+									<b><fmt:message key="firstName" />: </b><i>${user.firstName}</i>
+								</p>
+								<p>
+									<b><fmt:message key="lastName" />: </b><i>${user.lastName}</i>
+								</p>
+								<p>
+									<b><fmt:message key="email" />: </b><i>${user.email}</i>
+								</p>
+								<p>
+									<b><fmt:message key="telephone" />: </b><i>${user.telNumber}</i>
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-7">
+			<c:if test="${successMessage!=null}">
+			<div class="alert alert-success">
+				<strong><fmt:message key="${successMessage}" /></strong>
+			</div>
+			<c:remove var="successMessage" scope="session" />
+		</c:if>
+		<c:if test="${errorMessage!=null}">
+			<div class="alert alert-danger">
+				<strong><fmt:message key="${errorMessage}" /></strong>
+			</div>
+			<c:remove var="errorMessage" scope="session" />
+		</c:if>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<fmt:message key="myOrders" />
+						:
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td></td>
+									<td><fmt:message key="tour" /></td>
+									<td><fmt:message key="status" /></td>
+									<td><fmt:message key="dateOfOrder" /></td>
+									<td><fmt:message key="bill" /></td>
+									<td><fmt:message key="percent" /></td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:set var="i" value="1" />
+
+								<c:forEach items="${listOrders}" var="order">
+									<c:if test="${order.status.name == 'registered' }">
+										<tr class="warning">
+									</c:if>
+									<c:if test="${order.status.name == 'paid' }">
+										<tr class="success">
+									</c:if>
+									<c:if test="${order.status.name == 'canceled' }">
+										<tr class="danger">
+									</c:if>
+
+									<td>${i}<c:set var="i" value="${ i+1 }" /></td>
+									<td>
+
+										<form action="controller" method="get">
+											<input type="hidden" name="command" value="viewTour" /> <input
+												type="hidden" name="idTour" value="${order.tour.id}" />
+											<button style="padding: 0px" class="btn btn-md btn-link"
+												type="submit">${order.tour.name}</button>
+										</form>
+
+
+									</td>
+									<td><fmt:message key="${order.status.name}" /></td>
+									<td>${order.orderDate}</td>
+									<td>${order.bill}</td>
+									<td><fmt:formatNumber
+											value="${(order.tour.price - order.bill)*100/order.tour.price }"
+											maxFractionDigits="0" /> %</td>&nbsp;
+						</tr>
+								</c:forEach>
+
+							</tbody>
+							<tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+</div>

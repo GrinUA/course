@@ -1,0 +1,37 @@
+<div class="container background" style="padding-top: 15px">
+	<hr>
+	
+							
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><fmt:message key="${userRole.name}" />:</h3>
+				</div>
+				<div class="panel-body">
+					<div class="container-fluide">
+					<p>
+					<img class="img-rounded center-block" src="img/${userRole.name}.png" height=150px width=140px /></p>
+						<div class="row">
+							<div class="col-md-12" style="padding-left: 30px">
+								<p>
+									<b><fmt:message key="firstName" />: </b><i>${user.firstName}</i>
+								</p>
+								<p>
+									<b><fmt:message key="lastName" />: </b><i>${user.lastName}</i>
+								</p>
+								<p>
+									<b><fmt:message key="email" />: </b><i>${user.email}</i>
+								</p>
+								<p>
+									<b><fmt:message key="telephone" />: </b><i>${user.telNumber}</i>
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

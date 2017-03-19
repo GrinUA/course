@@ -1,0 +1,28 @@
+<button class="btn form-control btn-md btn-default" data-toggle="modal" type="button"
+	data-target="#messageModal"><fmt:message key="order_tour" /></button>
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" data-show="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Dear Friend!</h4>
+					&nbsp;
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						Sign up or login to make an order!
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<a href="/login" class="btn btn-primary">Log in</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+		</div>
+	</div>
+</div>

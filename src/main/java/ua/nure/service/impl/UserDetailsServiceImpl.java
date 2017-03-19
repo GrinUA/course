@@ -1,4 +1,4 @@
-package ua.nure.service;
+package ua.nure.service.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,9 @@ import ua.nure.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
     @Autowired
@@ -28,17 +29,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if (optional.isPresent()) {
-            for (Role role : optional.get().getRoles()) {
-                authorities.add(new SimpleGrantedAuthority(role.name()));
-            }
+            authorities.addAll(optional.get().getRoles().stream().map(
+                    role -> new SimpleGrantedAuthority(role.name()))
+                    .collect(Collectors.toList()));
             System.err.println(optional.get() + " R: " + authorities);
             org.springframework.security.core.userdetails.User u =
             new org.springframework.security.core.userdetails.User(optional.get().getUsername(),
-                    optional.get().getPassword(),
-                    true,
-                    true,
-                    true,
-                    true, authorities);
+                    optional.get().getPassword(), authorities);
             return u;
 
         }

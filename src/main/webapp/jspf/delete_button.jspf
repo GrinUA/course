@@ -1,0 +1,8 @@
+
+<form action="controller" method="post">
+	<input type="hidden" name="idTour" value="${tour.id}" />
+	<td style="padding-left: 0px; padding-right: 0px;"><input
+		type="hidden" name="command" value="deleteTour" />
+		<button class="btn btn-xs btn-danger" type="submit"><fmt:message key="delete"/></button></td>
+</form>
+

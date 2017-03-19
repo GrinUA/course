@@ -1,0 +1,77 @@
+.borderless td, .borderless th {
+    border: none;
+}
+
+.jumbotron2 {
+	
+  background-image: url('../../../img/sky.jpg');
+  color: #000000;
+  position: relative;
+}
+
+html, body{
+	background-color: #E0F8F1;
+}
+
+.background{
+	background-color: white;
+}
+
+.grey{
+	background-color: #D8D8D8;
+}
+.padding-log{
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:10px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+@media (min-width: 768px) {
+ .container-small {
+   width: 200px;
+ }
+ .container-large {
+   width: 860px;
+ }
+}
+@media (min-width: 992px) {
+  .container-small {
+    width: 300px;
+  }
+  .container-large {
+    width: 1120px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-small {
+    width: 350px;
+  }
+  .container-large {
+    width: 1400px;
+  }
+}
+
+.container-small, .container-large {
+  max-width: 100%;
+}
+

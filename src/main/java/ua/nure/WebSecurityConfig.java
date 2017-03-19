@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -24,30 +25,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.err.println("configure");
-        http.httpBasic().and().csrf().disable()
-//                .authorizeRequests()
-//                    .antMatchers("/resources/**", "/registration").permitAll()
-//                    .anyRequest().authenticated()
-//                    .and()
-//                .authorizeRequests().antMatchers("/a/**").access("hasRole('ADMIN')")
-//                    .and()
-//                .formLogin()
-//                    .loginPage("/login")
-//                    .permitAll()
-//                    .and()
-//                .logout()
-//                    .permitAll();
-        .authorizeRequests()
+        http
+                .authorizeRequests()
+                    .mvcMatchers("/resources/**", "/jspf/**","/img/**","/index","/")
+                    .permitAll()
+                    .and()
+                .authorizeRequests()
+                    .antMatchers("/registration").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .permitAll();
+        /*.authorizeRequests()
                 .antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/a").access("hasRole('ADMIN')")
-                //.antMatchers("/confidential/**").access("hasRole('ROLE_SUPERADMIN')")
-                .and().formLogin().loginPage("/login").permitAll();//.defaultSuccessUrl("/", false);
+                //.antMatchers("/confidential*//*").access("hasRole('ROLE_SUPERADMIN')")
+                .and().formLogin().loginPage("/login").permitAll();//.defaultSuccessUrl("/", false);*/
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         System.err.println("Gl_configure");
-        auth.userDetailsService(userDetailsService);// .passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
         /*auth.inMemoryAuthentication().withUser("admin1").password("user").roles("ADMIN");*/
     }
 }

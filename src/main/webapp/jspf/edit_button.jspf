@@ -1,0 +1,10 @@
+
+<form action="controller" method="post">
+
+	<td style="padding-left: 0px; padding-right: 0px;"><input
+		type="hidden" name="idTour" value="${tour.id}" />
+		<input type="hidden" name="img" value="${tour.img}" /><input
+		type="hidden" name="command" value="viewTour" />
+		<input type="hidden" name="page" value="editTour" />
+		<button class="btn btn-xs btn-warning" type="submit"><fmt:message key="edit"/></button></td>
+</form>

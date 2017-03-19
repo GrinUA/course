@@ -1,0 +1,90 @@
+<button class="btn btn-xs btn-success" data-toggle="modal" type="button"
+	data-target="#discount${user.id}">
+	<span class="glyphicon glyphicon glyphicon-cog"
+		style="font-size: 120%; color: #ffffff"></span>
+</button>
+
+<div class="modal fade" id="discount${user.id}" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" data-show="true">
+	<div class="modal-dialog modal-lg">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><fmt:message key="discount_setting"/></h4>
+
+				<h3>
+					<fmt:message key="user"/>: <i>${user.firstName} ${user.lastName}</i><br> 
+					<fmt:message key="login"/>: <i>${user.login}</i>
+				</h3>
+			</div>
+
+			<div class="modal-body">
+
+				<div class="container-fluid">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td><fmt:message key="id"/></td>
+									<td><fmt:message key="cur_step"/>,%</td>
+									<td><fmt:message key="cur_percent"/>,%</td>
+									<td></td>
+								</tr>
+							</thead>
+							<tbody>
+							
+									<form action="controller" method="post">
+									<input type="hidden" name="command" value="deleteDiscount" /> <input
+										type="hidden" name="idDiscount" value="${user.discount.id}" />
+										<input type="hidden" name="loginD" value="${user.login}" />
+											<tr>
+												<td>${user.discount.id}</td>
+												<td>${user.discount.step}%</td>
+												<td>${user.discount.percent}%</td>
+												<td style="padding-left: 0px; padding-right: 0px;">
+												<c:if test="${user.discount.id!=0}">
+												
+												<button class="btn btn-xs btn-default" type="submit">
+														<span class="glyphicon glyphicon-trash"
+														style="font-size: 80%; color: #FF0000"></span>
+												</button>
+												</c:if>
+												</td>
+											</tr>
+
+										</form>
+								
+							</tbody>
+						</table>
+
+					</div>
+
+					<div style="border-top: 1px solid #333;">
+						<form action="controller" method="post">
+							<input type="hidden" name="command" value="addDiscount" /> <input
+								type="hidden" name="idDiscount" value="${user.discount.id}" />
+							<input type="hidden" name="loginD" value="${user.login}" /> <label>
+								<h4><fmt:message key="step"/>:</h4> <input type="text" class="form-control"
+								name="step" pattern="^[\d]{1,2}$" title="Only 1-99" required />
+							</label> <label>
+								<h4><fmt:message key="percent"/>:</h4> <input type="text" class="form-control"
+								name="percent"  pattern="^[\d]{1,2}$" title="Only 1-99" required/>
+							</label> <label><br>
+								<button class="btn btn-md btn-success" type="submit">
+									<fmt:message key="add"/></button> </label> <br>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="close"/></button>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
