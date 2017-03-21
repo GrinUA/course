@@ -1,3 +1,8 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
 <div class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -30,7 +35,8 @@
                         <li><a href="#"><img src="img/en.png"></a></li>
                         <li><a href="#"><img src="img/ru.png"></a></li>
                         <li><a href="#"><img src="img/uk.png"></a></li>
-                    </ul></li>
+                    </ul>
+                </li>
 
             </div>
             <div class="nav navbar-nav navbar-right" style="color: #FFFFFF">
@@ -45,118 +51,128 @@
             </div>
 
 
-
-
-
             <ul class="nav navbar-nav">
                 <li class="dropdown"><a class="dropdown-toggle"
                                         data-toggle="dropdown"><span class="glyphicon glyphicon-search"
-                                                                     style="font-size: 110%; color: #FFEB3B"></span> <fmt:message key="search"/></a>
+                                                                     style="font-size: 110%; color: #FFEB3B"></span>
+                    <fmt:message key="search"/></a>
                     <ul class="dropdown-menu noclose" role="menu">
                         <li>
-                            <form action="controller" method="post">
-                                <input type="hidden" name="command" value="findTour" />
-                                <div class="container container-small">
-                                    <div class="container-fluid"
-                                         style="padding: 15px; padding-bottom: 3px;border-left: dotted; border-right: dotted;">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <p>
-                                                    <span style="font-size: 120%;"><fmt:message key="name"/>:</span>
+                            <form:form method="post" modelAttribute="searchForm" action="/search">
+                            <div class="container container-small">
+                                <div class="container-fluid"
+                                     style="padding: 15px; padding-bottom: 3px;border-left: dotted; border-right: dotted;">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <p>
+                                                <span style="font-size: 120%;"><fmt:message key="name"/>:</span>
 
-                                                </p>
-                                                <p>
-                                                    <span style="font-size: 120%;"><fmt:message key="country"/>:</span>
-                                                </p>
-                                                <p>
-                                                    <span style="font-size: 120%;"><fmt:message key="tourType"/>:</span>
-                                                </p>
-                                                <p>
-                                                    <span style="font-size: 120%;"><fmt:message key="hotelType"/>:</span>
-                                                </p>
-                                                <p>
-                                                    <span style="font-size: 120%;"><fmt:message key="people"/>:</span>
-                                                </p>
+                                            </p>
+                                            <p>
+                                                <span style="font-size: 120%;"><fmt:message key="country"/>:</span>
+                                            </p>
+                                            <p>
+                                                <span style="font-size: 120%;"><fmt:message key="tourType"/>:</span>
+                                            </p>
+                                            <p>
+                                                <span style="font-size: 120%;"><fmt:message key="hotelType"/>:</span>
+                                            </p>
+                                            <p>
+                                                <span style="font-size: 120%;"><fmt:message key="people"/>:</span>
+                                            </p>
 
-                                                <p>
-                                                    <span style="font-size: 120%;"><fmt:message key="price"/>:</span>
-                                                </p>
+                                            <p>
+                                                <span style="font-size: 120%;"><fmt:message key="price"/>:</span>
+                                            </p>
 
-                                            </div>
-                                            <div class="col-md-7" style="padding-left: 25px">
-                                                <p>
-                                                    <input type="text" name="name" style="width: 120px" placeholder="<fmt:message key="name"/>"/>
-                                                </p>
-                                                <p>
-
-                                                    <input type="text" name="country" style="width: 120px" placeholder="<fmt:message key="country"/>"/>
-
-                                                </p>
-                                                <p>
-                                                    <select name="tourType" style="width: 120px">
+                                        </div>
+                                        <div class="col-md-7" style="padding-left: 25px">
+                                            <p>
+                                                <spring:bind path="name">
+                                                    <form:input type="text" path="name" style="width: 120px"
+                                                                placeholder="Tour name"></form:input></spring:bind>
+                                            </p>
+                                            <p>
+                                                <spring:bind path="country">
+                                                    <form:input type="text" path="country" style="width: 120px"
+                                                                placeholder="country"></form:input>
+                                                </spring:bind>
+                                            </p>
+                                            <p>
+                                                <spring:bind path="tourType">
+                                                    <form:select path="tourType" style="width: 120px">
                                                         <option selected="selected" value="">-</option>
                                                         <c:forEach items="${tourTypes}" var="tourType">
                                                             <option value="${tourType}">${tourType}</option>
                                                         </c:forEach>
-                                                    </select>
-                                                </p>
-                                                <p>
-                                                    <select name="hotelType" style="width: 120px">
+                                                    </form:select>
+                                                </spring:bind>
+                                            </p>
+                                            <p>
+                                                <spring:bind path="hotelType">
+                                                    <form:select path="hotelType" style="width: 120px">
                                                         <option selected="selected" value="">-</option>
                                                         <c:forEach items="${hotelTypes}" var="hotelType">
                                                             <option value="${hotelType}">${hotelType}</option>
                                                         </c:forEach>
+                                                    </form:select>
+                                                </spring:bind>
+                                            </p>
 
-                                                    </select>
-                                                </p>
+                                            <p>
+                                                <spring:bind path="peopleCount">
+                                                    <form:input type="text" path="peopleCount" style="width: 120px"
+                                                                placeholder="from"/>
+                                                </spring:bind>
+                                            </p>
 
-                                                <p>
-                                                    <input type="text" name="minPeople" style="width: 52px" placeholder="<fmt:message key="from"/>"/>
-                                                    - <input type="text" name="maxPeople" style="width: 52px" placeholder="<fmt:message key="to"/>"/>&nbsp;
-                                                </p>
-
-                                                <p>
-                                                    <input type="text" name="minPrice" style="width: 52px" placeholder="<fmt:message key="from"/>"/> -
-                                                    <input type="text" name="maxPrice" style="width: 52px" placeholder="<fmt:message key="to"/>"/>$&nbsp;
-                                                </p>
-                                            </div>
+                                            <p>
+                                                <spring:bind path="price">
+                                                    <form:input type="text" path="price" style="width: 120px"
+                                                                placeholder="from"/>
+                                                </spring:bind>
+                                            </p>
+                                        </div>
                                             <input type="submit" value="<fmt:message key="search"/>" style="margin-left: 60px;width: 150px"
                                                    class="form-control btn btn-md btn-primary" />
                                         </div>
 
                                     </div>
                                 </div>
-                            </form>
+                            </form:form>
                         </li>
 
-                    </ul></li>
+                    </ul>
+                </li>
             </ul>
             <c:if test="${user !=null}">
                 <c:if test="${userRole.name != 'user' }">
                     <ul class="nav navbar-nav">
                         <li class="dropdown"><a class="dropdown-toggle"
                                                 data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
-                                                                             style="font-size: 110%; color: #FFEB3B"></span> <fmt:message key="menu"/><b
-                                class="caret"></b></a>
+                                                                             style="font-size: 110%; color: #FFEB3B"></span>
+                            <fmt:message key="menu"/><b
+                                    class="caret"></b></a>
 
                             <ul class="dropdown-menu">
                                 <c:choose>
                                     <c:when test="${userRole.name == 'admin'}">
-                                        <li><a href="controller?command=listOrders"><fmt:message key="orders"/></a></li>
-                                        <li><a href="controller?command=listTours"><fmt:message key="tours"/></a></li>
-                                        <li><a href="controller?command=listUsers"><fmt:message key="users"/></a></li>
+                                        <li><a href="/listOrders"><fmt:message key="orders"/></a></li>
+                                        <li><a href="/listTours"><fmt:message key="tours"/></a></li>
+                                        <li><a href="/listUsers"><fmt:message key="users"/></a></li>
                                         <li class="divider"></li>
                                         <li><a href="#"><fmt:message key="info"/>...</a></li>
                                     </c:when>
-                                 <%--   <c:when test="${userRole.name == 'admin'}">
+                                    <%--   <c:when test="${userRole.name == 'admin'}">
 
-                                        <li><a href="controller?command=listOrders"><fmt:message key="orders"/></a></li>
-                                        <li><a href="controller?command=listTours"><fmt:message key="tours"/></a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#"><fmt:message key="info"/>...</a></li>
-                                    </c:when>--%>
+                                           <li><a href="controller?command=listOrders"><fmt:message key="orders"/></a></li>
+                                           <li><a href="controller?command=listTours"><fmt:message key="tours"/></a></li>
+                                           <li class="divider"></li>
+                                           <li><a href="#"><fmt:message key="info"/>...</a></li>
+                                       </c:when>--%>
                                 </c:choose>
-                            </ul></li>
+                            </ul>
+                        </li>
                     </ul>
                 </c:if>
             </c:if>

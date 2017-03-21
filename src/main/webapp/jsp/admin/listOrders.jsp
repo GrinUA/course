@@ -75,7 +75,6 @@
 								<td><fmt:message key="tour" /></td>
 								<td><fmt:message key="dateOfOrder" /></td>
 								<td><fmt:message key="bill" /></td>
-								<td>-<fmt:message key="dis" />%
 								</td>
 								<td><fmt:message key="status" /></td>
 							</tr>
@@ -94,21 +93,17 @@
 								<c:if test="${order.status.name == 'canceled' }">
 									<tr class="danger">
 								</c:if>
-								<td>${order.user.id}</td>
-								<td>${order.user.firstName} ${order.user.lastName}</td>&nbsp;
+								<td>${user.id}</td>
+								<td>${user.firstName} ${user.lastName}</td>&nbsp;
 							
 								<td><a
-									href="${pageContext.request.contextPath}/controller?command=viewTour&idTour=${order.tour.id}">
-										${order.tour.name};<fmt:message key="${order.tour.country}" />;
-										$<fmt:formatNumber value="${order.tour.price}"
-											maxFractionDigits="0" />
+									href="${pageContext.request.contextPath}/controller?command=viewTour&idTour=${order.tourId}">
+										${order.tourName};
 								</a></td>
 								<td>${order.orderDate}</td>
 								<td>$<fmt:formatNumber value="${order.bill}"
 										maxFractionDigits="0" /></td>
-								<td><fmt:formatNumber
-										value="${(order.tour.price - order.bill)*100/order.tour.price }"
-										maxFractionDigits="0" /> %</td>&nbsp;
+
 								<td><fmt:message key="${order.status.name}" /></td>
 								<td style="padding: 0px; padding-top: 2px; padding-bottom: 2px">
 									<form action="controller" method="post">

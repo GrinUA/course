@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import ua.nure.model.Role;
+import ua.nure.model.Tour;
 import ua.nure.model.User;
 import ua.nure.repository.UserRepository;
 import ua.nure.service.UserService;
@@ -28,11 +29,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-       user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         List<Role> roles = new ArrayList<>();
         roles.add(Role.USER);
         user.setRoles(roles);
         user.setId(UUID.randomUUID().toString());
+        user.setBlocked(false);
         userRepository.save(user);
     }
 
@@ -44,9 +46,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(Model model) {
+    public String addUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
+        model.addAttribute("searchForm",new Tour());
 
         User user = userRepository.findByUsername(userName);
         if (user != null) {
@@ -54,12 +57,27 @@ public class UserServiceImpl implements UserService {
             System.err.println(user);
             model.addAttribute("user", user);
             model.addAttribute("userRole", user.getRoles().get(0));
+            return user.getId();
         }
-
+        return null;
     }
 
     @Override
     public User getById(String id) {
         return userRepository.findById(id);
     }
+
+
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+
+
+
 }
+
+
+

@@ -1,9 +1,9 @@
 package ua.nure.model;
 
 public enum Status {
-	REGISTERED("Registered"),
-	PAID("Paid"),
-	CANCELED("Canceled");
+	REGISTERED("registered"),
+	PAID("paid"),
+	CANCELED("canceled");
 
 	Status(String name) {
 		this.name = name;

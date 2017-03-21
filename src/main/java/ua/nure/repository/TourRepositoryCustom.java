@@ -5,7 +5,7 @@ import ua.nure.model.Tour;
 
 import java.util.List;
 
-public interface TourRepository extends MongoRepository<Tour, String>,TourRepositoryCustom {
-    Tour findById(String id);
+public interface TourRepositoryCustom{
+    List<Tour> findByCondition(Tour tour);
 
 }

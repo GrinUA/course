@@ -18,7 +18,6 @@
 						<td><fmt:message key="login" /></td>
 						<td><fmt:message key="role" /></td>
 						<td><fmt:message key="userName" /></td>
-						<td><fmt:message key="email" /></td>
 						<td><fmt:message key="telNumber" /></td>&nbsp;
 						<td><fmt:message key="discount" /></td>
 						<td><fmt:message key="block" /></td>
@@ -27,24 +26,25 @@
 					</tr>
 				</thead>
 				<tbody>
+
 					<c:forEach items="${listUsers}" var="userT">
 						<c:if test="${userT.id != user.id }">
 							<c:if test="${userT.blocked == true}">
 								<tr class="danger">
-									<td><c:out value="${userT.login}" /></td> &nbsp;
-									<td><c:out value="${userT.role}" /></td> &nbsp;
+									<td><c:out value="${userT.username}" /></td> &nbsp;
+									<td><c:out value="${userT.roles.get(0).name}" /></td> &nbsp;
 									<td><c:out value="${userT.firstName}" /> <c:out
 											value="${userT.lastName}" /></td>&nbsp;
-									<td><c:out value="${userT.email}" /></td>
 									<td><c:out value="${userT.telNumber}" /></td>
-									<c:if test="${userT.discount.id == 0}">
+									<td>D</td>
+									<%--<c:if test="${userT.discountId == 0}">
 										<td>-</td>
 									</c:if>
-									<c:if test="${userT.discount.id != 0}">
-										<td><c:out value="${userT.discount.id}" />: S. <c:out
-												value="${userT.discount.step}%" />, P. <c:out
-												value="${userT.discount.percent}%	" /> &nbsp;</td>
-									</c:if>
+									<c:if test="${userTDiscount.id != 0}">
+										<td><c:out value="${userTDiscount.id}" />: S. <c:out
+												value="${userTDiscount.step}%" />, P. <c:out
+												value="${userTDiscount.percent}%	" /> &nbsp;</td>
+									</c:if>--%>
 
 									<td>
 										<form action="controller" method="post">
@@ -52,10 +52,9 @@
 												type="hidden" name="idUser" value="${userT.id}" />
 											<div class="input-group">
 
-												<select name="access" class="form-control">
+												<select name="access" class="aorm-control">
 													<c:forEach items="${roles}" var="cur_role">
-														<option value="${cur_role}"><fmt:message
-																key="${cur_role}" /></option>
+														<option value="${cur_role}">${cur_role.name}</option>
 													</c:forEach>
 												</select> <span class="input-group-btn">
 													<button class="btn btn-md btn-default" type="submit">></button>
@@ -73,33 +72,32 @@
 
 							<c:if test="${userT.blocked == false}">
 								<tr class="success">
-									<td><c:out value="${userT.login}" /></td> &nbsp;
-									<td><c:out value="${userT.role}" /></td> &nbsp;
+
+									<td><c:out value="${userT.username}" /></td> &nbsp;
+									<td><c:out value="${userT.roles.get(0).name}" /></td> &nbsp;
 									<td><c:out value="${userT.firstName}" /> <c:out
 											value="${userT.lastName}" /></td>&nbsp;
-									<td><c:out value="${userT.email}" /></td>
 									<td><c:out value="${userT.telNumber}" /></td>
-									<c:if test="${userT.discount.id == 0}">
-										<td>-</td>
-									</c:if>
-
-									<c:if test="${userT.discount.id != 0}">
-										<td><c:out value="${userT.discount.id}" />: S. <c:out
-												value="${userT.discount.step}%" />, P. <c:out
-												value="${userT.discount.percent}%	" /> &nbsp;</td>
-									</c:if>
+									<td>D</td>
+										<%--<c:if test="${userT.discountId == 0}">
+                                            <td>-</td>
+                                        </c:if>
+                                        <c:if test="${userTDiscount.id != 0}">
+                                            <td><c:out value="${userTDiscount.id}" />: S. <c:out
+                                                    value="${userTDiscount.step}%" />, P. <c:out
+                                                    value="${userTDiscount.percent}%	" /> &nbsp;</td>
+                                        </c:if>--%>
 
 									<td>
-										<form action="controller" method="post">
-											<input type="hidden" name="command" value="accessLevel" /> <input
+										<form action="/changerole" method="post">
+ <input
 												type="hidden" name="idUser" value="${userT.id}" />
 												
 											<div class="input-group">
 
 												<select name="access" class="form-control">
 													<c:forEach items="${roles}" var="cur_role">
-														<option value="${cur_role}"><fmt:message
-																key="${cur_role}" /></option>
+														<option value="${cur_role}">${cur_role.name}</option>
 													</c:forEach>
 												</select> <span class="input-group-btn">
 													<button class="btn btn-md btn-default" type="submit">></button>

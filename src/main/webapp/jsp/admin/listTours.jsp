@@ -42,6 +42,7 @@
 								</div>
 								
 								<div class="col-md-2">
+
 									<c:if test="${userRole.name == 'admin'}">
 										<%@ include file="/jspf/add_button.jspf"%>
 									</c:if>

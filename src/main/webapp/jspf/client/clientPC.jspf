@@ -22,7 +22,7 @@
 									<b><fmt:message key="lastName" />: </b><i>${user.lastName}</i>
 								</p>
 								<p>
-									<b><fmt:message key="email" />: </b><i>${user.email}</i>
+									<b><fmt:message key="email" />: </b><i>${user.username}</i>
 								</p>
 								<p>
 									<b><fmt:message key="telephone" />: </b><i>${user.telNumber}</i>
@@ -64,7 +64,6 @@
 									<td><fmt:message key="status" /></td>
 									<td><fmt:message key="dateOfOrder" /></td>
 									<td><fmt:message key="bill" /></td>
-									<td><fmt:message key="percent" /></td>
 								</tr>
 							</thead>
 							<tbody>
@@ -84,21 +83,18 @@
 									<td>${i}<c:set var="i" value="${ i+1 }" /></td>
 									<td>
 
-										<form action="controller" method="get">
-											<input type="hidden" name="command" value="viewTour" /> <input
-												type="hidden" name="idTour" value="${order.tour.id}" />
+										<form action="/viewTour" method="get"> <input
+												type="hidden" name="idTour" value="${order.tourId}" />
 											<button style="padding: 0px" class="btn btn-md btn-link"
-												type="submit">${order.tour.name}</button>
+												type="submit">${order.tourName}</button>
 										</form>
 
 
 									</td>
-									<td><fmt:message key="${order.status.name}" /></td>
+									<td>${order.status.name}</td>
 									<td>${order.orderDate}</td>
 									<td>${order.bill}</td>
-									<td><fmt:formatNumber
-											value="${(order.tour.price - order.bill)*100/order.tour.price }"
-											maxFractionDigits="0" /> %</td>&nbsp;
+
 						</tr>
 								</c:forEach>
 

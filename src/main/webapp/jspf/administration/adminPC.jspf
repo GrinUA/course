@@ -21,7 +21,7 @@
 									<b><fmt:message key="lastName" />: </b><i>${user.lastName}</i>
 								</p>
 								<p>
-									<b><fmt:message key="email" />: </b><i>${user.email}</i>
+									<b><fmt:message key="email" />: </b><i>${user.username}</i>
 								</p>
 								<p>
 									<b><fmt:message key="telephone" />: </b><i>${user.telNumber}</i>

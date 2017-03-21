@@ -17,6 +17,8 @@ import ua.nure.service.TourService;
 import ua.nure.service.UserService;
 import ua.nure.service.impl.TourServiceImpl;
 
+import java.util.List;
+
 @Controller
 public class OrderController {
 
@@ -41,15 +43,18 @@ public class OrderController {
         model.addAttribute("discount", discount);
         model.addAttribute("tour", tour);
         userService.addUser(model);
-        System.err.println("THERE");
         return "jsp/user/previewOrder";
     }
 
     @RequestMapping(value = {"/confirm"}, method = RequestMethod.POST)
     public String confirm(String userId,String tourId, Double bill, Model model) {
         Order order = new Order();
+        User user = userService.getById(userId);
+        order.setUserFullName(user.getFirstName() + " " + user.getLastName());
         order.setUserId(userId);
+        Tour tour = tourService.getById(tourId);
         order.setTourId(tourId);
+        order.setTourName(tour.getName());
         order.setBill(bill);
 
         System.err.println(order);
@@ -58,6 +63,14 @@ public class OrderController {
         userService.addUser(model);
         return "redirect:/index";
     }
+    @RequestMapping(value = {"/listOrders"}, method = RequestMethod.GET)
+    public String listOrders(Model model) {
+        List<Order> allOrders = orderService.findAllOrders();
+        model.addAttribute("listOrders", allOrders);
+        userService.addUser(model);
+        return "jsp/admin/listOrders";}
+
+
 
 
 }

@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         System.err.println("configure");
         http
                 .authorizeRequests()
-                    .mvcMatchers("/resources/**", "/jspf/**","/img/**","/index","/")
+                    .mvcMatchers("/resources/**", "/jspf/**","/img/**","/index","/","/search")
                     .permitAll()
                     .and()
                 .authorizeRequests()

@@ -8,18 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ua.nure.model.Role;
-import ua.nure.model.Tour;
-import ua.nure.model.User;
+import ua.nure.model.*;
 import ua.nure.repository.UserRepository;
 import ua.nure.service.SecurityService;
 import ua.nure.service.TourService;
 import ua.nure.service.UserService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class AppController {
@@ -44,7 +39,10 @@ public class AppController {
         System.err.println(listToursF);
         model.addAttribute("count", listToursF.size());
         model.addAttribute("listToursF", listToursF);
+        model.addAttribute("tourTypes", Arrays.asList(TourType.values()));
+        model.addAttribute("hotelTypes", Arrays.asList(HotelType.values()));
         userService.addUser(model);
+        model.addAttribute("searchForm",new Tour());
 
         return "index";
     }

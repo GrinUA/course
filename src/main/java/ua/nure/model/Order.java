@@ -8,10 +8,33 @@ public class Order {
 
 	private String id;
 	private String userId;
+
+	private  String userFullName;
+
 	private String tourId;
+	private  String tourName;
 	private Status status;
 	private Date orderDate;
 	private Double bill;
+
+
+	public String getTourName() {
+		return tourName;
+	}
+
+
+
+	public String getUserFullName() {
+		return userFullName;
+	}
+
+	public void setUserFullName(String userFullName) {
+		this.userFullName = userFullName;
+	}
+
+	public void setTourName(String tourName) {
+		this.tourName = tourName;
+	}
 
 	public String getId() {
 		return id;
