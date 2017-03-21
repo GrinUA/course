@@ -1,5 +1,6 @@
 package ua.nure.service.impl;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import ua.nure.model.Tour;
 import ua.nure.model.User;
 import ua.nure.repository.UserRepository;
 import ua.nure.service.UserService;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +77,21 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public void updateRole(String userId, Role role) {
+        User user = userRepository.findById(userId);
+        List<Role> roleList = new ArrayList<>();
+        roleList.add(role);
+        user.setRoles(roleList);
+        userRepository.save(user);
+    }
 
-
+    @Override
+    public void updateBlock(String userId) {
+        User user = userRepository.findById(userId);
+        user.setBlocked(!user.getBlocked());
+        userRepository.save(user);
+    }
 }
 
 

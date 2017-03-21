@@ -44,6 +44,7 @@ public class AppController {
         userService.addUser(model);
         model.addAttribute("searchForm",new Tour());
 
+
         return "index";
     }
 

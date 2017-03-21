@@ -47,8 +47,9 @@
 									</c:if>--%>
 
 									<td>
-										<form action="controller" method="post">
-											<input type="hidden" name="command" value="accessLevel" /> <input
+										<form action="/accessChange" method="post">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											 <input
 												type="hidden" name="idUser" value="${userT.id}" />
 											<div class="input-group">
 
@@ -64,7 +65,7 @@
 										</form>
 									</td>
 									<td><a
-										href="${pageContext.request.contextPath}/controller?command=unblockUser&id=${userT.id}"
+										href="/blockChange?idUser=${userT.id}"
 										class="btn btn-xs btn-primary"><fmt:message key="unblock" /></a></td>
 
 								</tr>
@@ -89,13 +90,13 @@
                                         </c:if>--%>
 
 									<td>
-										<form action="/changerole" method="post">
- <input
-												type="hidden" name="idUser" value="${userT.id}" />
-												
+										<form action="/accessChange" method="post">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<input
+													type="hidden" name="idUser" value="${userT.id}" />
 											<div class="input-group">
 
-												<select name="access" class="form-control">
+												<select name="access" class="aorm-control">
 													<c:forEach items="${roles}" var="cur_role">
 														<option value="${cur_role}">${cur_role.name}</option>
 													</c:forEach>
@@ -108,7 +109,7 @@
 									</td>
 
 									<td><a
-										href="${pageContext.request.contextPath}/controller?command=blockUser&id=${userT.id}"
+										href="/blockChange?idUser=${userT.id}"
 										class="btn btn-xs btn-primary"><fmt:message key="block" /></a></td>
 
 								</tr>

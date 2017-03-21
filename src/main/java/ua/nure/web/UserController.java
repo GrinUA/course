@@ -1,5 +1,6 @@
 package ua.nure.web;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import ua.nure.model.Order;
 import ua.nure.model.Role;
 import ua.nure.model.User;
@@ -72,13 +73,13 @@ public class UserController {
     public String personalCabinet(Model model) {
         String id = userService.addUser(model);
         List<Order> orderList = orderService.getAllOrders(id);
-        
 
 
-        model.addAttribute("listOrders",orderList);
+        model.addAttribute("listOrders", orderList);
 
         return "jsp/user/personalCabinet";
     }
+
     @RequestMapping(value = {"/listUsers"}, method = RequestMethod.GET)
     public String listUsers(Model model) {
         List<User> allUsers = userService.findAllUsers();
@@ -87,8 +88,24 @@ public class UserController {
         model.addAttribute("listUsers", allUsers);
         model.addAttribute("roles", Arrays.asList(Role.values()));
         userService.addUser(model);
-        return "jsp/admin/listUsers";}
+        return "jsp/admin/listUsers";
     }
+    @RequestMapping(value = {"/accessChange"}, method = RequestMethod.POST)
+    public  String accessChange(Model model, Role access,String idUser ) {
+        List<User> allUsers = userService.findAllUsers();
+        userService.updateRole(idUser, access);
+        userService.addUser(model);
+     return "redirect:/listUsers";
+    }
+    @RequestMapping (value = {"blockChange"}, method = RequestMethod.GET)
+    public  String blockChange (Model model, String idUser){
+        List<User> allUsers = userService.findAllUsers();
+        userService.addUser(model);
+        userService.updateBlock(idUser);
+        return "redirect:/listUsers";
+    }
+
+}
 
 
 

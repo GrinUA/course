@@ -1,6 +1,7 @@
 package ua.nure.service;
 
 import org.springframework.ui.Model;
+import ua.nure.model.Role;
 import ua.nure.model.User;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public interface UserService {
 
 
     List<User> findAllUsers();
+
+    void updateRole(String userId, Role role);
+    void updateBlock(String  userId);
 
 
 
