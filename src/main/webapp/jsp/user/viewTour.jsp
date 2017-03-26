@@ -99,8 +99,8 @@
 					<form action="" method="post">
 						<input type="hidden" name="command" value="viewTour" /> <input
 							type="hidden" name="idTour" value="${tour.id}" /> <input
-							type="hidden" name="page" value="editTour" />
-						<button class=" btn btn-md btn-warning" type="submit"><fmt:message key="edit" /> </button>
+							type="hidden" name="page" value="#" />
+						<%--<button class=" btn btn-md btn-warning" type="submit"><fmt:message key="edit" /> </button>--%>
 					</form>
 					</c:if>
 				<c:if test="${userRole.name == 'user' }">

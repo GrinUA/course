@@ -7,9 +7,7 @@ import ua.nure.model.Status;
 import ua.nure.repository.OrderRepository;
 import ua.nure.service.OrderService;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -33,4 +31,19 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAllOrders() {
         return orderRepository.findAll();
     }
-}
+
+    @Override
+    public List<Order> findOrdersByStatus(Status status) {
+        return  orderRepository.findByStatus(status);
+    }
+
+    @Override
+    public void updateStatus(String orderId, Status status) {
+        Order order = orderRepository.findById(orderId);
+        order.setStatus(status);
+        orderRepository.save(order);
+    }
+
+    }
+
+

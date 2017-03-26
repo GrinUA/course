@@ -1,5 +1,7 @@
 package ua.nure.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import java.util.List;
 
 @Controller
 public class TourController {
+    private static final Logger LOG = LoggerFactory.getLogger(TourController.class);
 
     @Autowired
     private UserService userService;
@@ -29,7 +32,7 @@ public class TourController {
     @RequestMapping(value = {"/viewTour"}, method = RequestMethod.GET)
     public String viewTour(String idTour, Model model) {
         Tour tour = tourService.getById(idTour);
-        System.err.println(idTour);
+        LOG.info("IdTour {}", idTour);
         model.addAttribute("tour", tour);
         userService.addUser(model);
         return "jsp/user/viewTour";
@@ -39,21 +42,42 @@ public class TourController {
     public String listTours(Model model) {
         List<Tour> allTours = tourService.findAllTours();
         model.addAttribute("listTours", allTours);
+        model.addAttribute("tourType", Arrays.asList(TourType.values()));
+        model.addAttribute("hotelType", Arrays.asList(HotelType.values()));
         userService.addUser(model);
         return "jsp/admin/listTours";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searching(@ModelAttribute("searchForm") Tour searchForm, BindingResult bindingResult, Model model) {
-        System.err.println(searchForm);
+        LOG.info("searchForm {}", searchForm);
         List<Tour> listToursF = tourService.searchTours(searchForm);
-        System.err.println(listToursF);
+        LOG.info("ress {}", listToursF);
         model.addAttribute("count", listToursF.size());
         model.addAttribute("listToursF", listToursF);
         model.addAttribute("tourTypes", Arrays.asList(TourType.values()));
         model.addAttribute("hotelTypes", Arrays.asList(HotelType.values()));
         userService.addUser(model);
-        model.addAttribute("searchForm",new Tour());
+        model.addAttribute("searchForm", new Tour());
         return "index";
+    }
+
+    @RequestMapping(value = {"/hotChange"}, method = RequestMethod.GET)
+    public String hotChange(Tour tour, String idTour) {
+        List<Tour> allTours = tourService.findAllTours();
+        tourService.updateHot(idTour);
+        return "redirect:/listTours";
+    }
+
+
+    @RequestMapping(value = "/addTour", method = RequestMethod.POST)
+    public String adding(Model model, Tour tour) {
+
+
+        model.addAttribute("tourType", Arrays.asList(TourType.values()));
+        model.addAttribute("hotelType", Arrays.asList(HotelType.values()));
+        tourService.addTour(tour);
+        return "redirect:/listTours";
+
     }
 }

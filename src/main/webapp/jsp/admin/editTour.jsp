@@ -12,13 +12,13 @@
 <body>
 <%@ include file="/jspf/header.jspf"%>
 	<div class="container background">
-		<form enctype="multipart/form-data" action="controller" method="post">
-			<input type="hidden" name="command" value="editTour" />
+		<form enctype="multipart/form-data" action="#">
+			<input type="hidden" name="command" value="#" />
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-6">
-						<input type="hidden" name="command" value="editTour" /> <input
+						<input type="hidden" name="command" value="#" /> <input
 							type="hidden" name="idTour" value="${tour.id}" />
 						<h3>
 							<b><fmt:message key="tour" />: </b><i>${tour.name}</i><br> <br> <b><fmt:message key="place" />:

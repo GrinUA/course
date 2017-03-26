@@ -19,12 +19,13 @@ public class TourRepositoryImpl implements TourRepositoryCustom {
 
     @Override
     public List<Tour> findByCondition(Tour tour) {
+        System.err.println(tour);
         Query query = new Query();
         if (tour.getName() != null && !tour.getName().isEmpty()) {
-            query.addCriteria(Criteria.where("country").is(tour.getCountry()));
+            query.addCriteria(Criteria.where("name").is(tour.getName()));
         }
         if(tour.getCountry() != null && !tour.getCountry().isEmpty()){
-            query.addCriteria(Criteria.where("name").is(tour.getName()));
+            query.addCriteria(Criteria.where("country").is(tour.getCountry()));
         }
         if(tour.getTourType() != null){
             query.addCriteria(Criteria.where("tourType").is(tour.getTourType()));
@@ -38,6 +39,7 @@ public class TourRepositoryImpl implements TourRepositoryCustom {
         if(tour.getPrice() != null){
             query.addCriteria(Criteria.where("price").is(tour.getPrice()));
         }
+        System.err.println(query);
         return mongoTemplate.find(query, Tour.class);
 
     }

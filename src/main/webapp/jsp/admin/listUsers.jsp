@@ -20,8 +20,8 @@
 						<td><fmt:message key="userName" /></td>
 						<td><fmt:message key="telNumber" /></td>&nbsp;
 						<td><fmt:message key="discount" /></td>
-						<td><fmt:message key="block" /></td>
 						<td><fmt:message key="access_level" /></td>
+						<td><fmt:message key="block" /></td>
 
 					</tr>
 				</thead>
@@ -49,8 +49,7 @@
 									<td>
 										<form action="/accessChange" method="post">
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-											 <input
-												type="hidden" name="idUser" value="${userT.id}" />
+											 <input type="hidden" name="idUser" value="${userT.id}" />
 											<div class="input-group">
 
 												<select name="access" class="aorm-control">

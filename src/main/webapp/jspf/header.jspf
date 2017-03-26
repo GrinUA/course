@@ -28,7 +28,7 @@
                               style="font-size: 160%; color: #ffffff; top: 15px;"></span>
                     </a>
                 </c:if>
-                <li class="dropdown"><a class="dropdown-toggle"
+               <%-- <li class="dropdown"><a class="dropdown-toggle"
                                         data-toggle="dropdown"> <img src="img/${language!=null?language:'en'}.png">
                 </a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -36,7 +36,7 @@
                         <li><a href="#"><img src="img/ru.png"></a></li>
                         <li><a href="#"><img src="img/uk.png"></a></li>
                     </ul>
-                </li>
+                </li>--%>
 
             </div>
             <div class="nav navbar-nav navbar-right" style="color: #FFFFFF">

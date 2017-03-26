@@ -6,10 +6,11 @@
 		<div class="modal-content">
 
 
-			<form action="controller" name="addTour" method="post">
+			<form:form method="post" modelAttribute="addTour" action="/addTour">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<h4 class="modal-title"><fmt:message key="addTour"/></h4>
 					&nbsp;
 				</div>
@@ -18,7 +19,7 @@
 						<div class="row">
 							<div class="col-md-3">
 
-								<input type="hidden" name="command" value="addTour" />
+								<input type="hidden" name="/addTour" value="/addTour" />
 								<p>
 									<fmt:message key="name"/> <input type="text" class="form-control" name="name" required/>
 								</p>
@@ -29,8 +30,8 @@
 										<div class="col-md-6" style="padding-left: 0px">
 											<fmt:message key="tourType"/> <select name="tourType" class="form-control">
 												<option selected="selected">-</option>
-												<c:forEach items="${tourTypes}" var="tourType">
-													<option value="${tourType}"><fmt:message key="${tourType}"/></option>
+												<c:forEach items="${tourType}" var="tourType">
+													<option value="${tourType}">${tourType.name}</option>
 												</c:forEach>
 											</select>
 
@@ -38,8 +39,8 @@
 										<div class="col-md-6" style="padding-left: 0px">
 										<fmt:message key="hotelType"/> <select name="hotelType" class="form-control">
 										<option selected="selected">-</option>
-										<c:forEach items="${hotelTypes}" var="hotelType">
-											<option value="${hotelType}"><fmt:message key="${hotelType}"/></option>
+										<c:forEach items="${hotelType}" var="hotelType">
+											<option value="${hotelType}">${hotelType.name}</option>
 										</c:forEach>
 										
 									</select>
@@ -92,7 +93,7 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </div>

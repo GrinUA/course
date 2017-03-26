@@ -1,5 +1,6 @@
 package ua.nure.service;
 
+import org.springframework.ui.Model;
 import ua.nure.model.Tour;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface TourService {
     List<Tour> findAllTours();
 
     List<Tour>  searchTours(Tour tour);
+    void updateHot(String tourId);
+    void addTour(Tour tour);
 }
 

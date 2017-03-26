@@ -28,11 +28,6 @@ public class AppController {
     @Autowired
     private TourService tourService;
 
-    /*@RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
-    }*/
-
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         List<Tour> listToursF = tourService.getAllTours();
@@ -43,8 +38,6 @@ public class AppController {
         model.addAttribute("hotelTypes", Arrays.asList(HotelType.values()));
         userService.addUser(model);
         model.addAttribute("searchForm",new Tour());
-
-
         return "index";
     }
 

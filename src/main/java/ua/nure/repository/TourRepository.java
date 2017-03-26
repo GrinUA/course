@@ -8,4 +8,5 @@ import java.util.List;
 public interface TourRepository extends MongoRepository<Tour, String>,TourRepositoryCustom {
     Tour findById(String id);
 
+
 }

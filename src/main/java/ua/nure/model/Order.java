@@ -3,7 +3,6 @@ package ua.nure.model;
 import java.util.Date;
 
 
-
 public class Order {
 
 	private String id;
@@ -84,5 +83,17 @@ public class Order {
 		this.bill = bill;
 	}
 
-
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id='" + id + '\'' +
+				", userId='" + userId + '\'' +
+				", userFullName='" + userFullName + '\'' +
+				", tourId='" + tourId + '\'' +
+				", tourName='" + tourName + '\'' +
+				", status=" + status +
+				", orderDate=" + orderDate +
+				", bill=" + bill +
+				'}';
+	}
 }
